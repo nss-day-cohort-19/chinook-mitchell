@@ -1,12 +1,8 @@
-select total(total) as "2009 total"
-from invoice i
-where i.invoicedate like "2009%"
-union all
-select total(total) as "2011 total"
-from invoice i
-where i.invoicedate like "2011%";
- 
-select total,
-	total(case when invoicedate = "2009%") as "2009_total",
-	total(case when invoicedate = "2011%") as "2011_total"
-from invoice;
+-- 9. What are the respective total sales for each of those years?
+
+select  'S' || sum(i.total) as "Total",
+			strftime('%Y', i.invoicedate) as InvoiceYear
+from invoice i 
+where InvoiceYear = '2011'
+or invoiceyear = '2009'
+group by invoiceyear

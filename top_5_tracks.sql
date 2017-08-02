@@ -7,3 +7,11 @@ and il.invoiceId = i.invoiceId
 group by t.name
 order by "Purchase Count" desc
 limit 5;
+
+-- steve's solution:
+select t.name, count(t.name) purchasecount
+from track t
+join invoiceline l on l.trackid = t.trackid
+group by t.name
+order by purchasecount desc
+limit 5;
